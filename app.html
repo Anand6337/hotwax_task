@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hotwax Commerce - Create Person</title>
+        <link rel="stylesheet" href="app.css">
+        <script src="app.js"></script>
+</head>
+<body>
+
+<h2>Create Person</h2>
+<form id="personForm">
+    <label for="firstName">First Name:</label>
+    <input type="text" id="firstName" name="FIRST_NAME" required>
+
+    <label for="middleName">Middle Name:</label>
+    <input type="text" id="middleName" name="MIDDLE_NAME">
+
+    <label for="lastName">Last Name:</label>
+    <input type="text" id="lastName" name="LAST_NAME" required>
+
+    <label for="gender">Gender:</label>
+    <select id="gender" name="GENDER" required>
+        <option value="M">Male</option>
+        <option value="F">Female</option>
+    </select>
+
+    <label for="birthDate">Birth Date:</label>
+    <input type="date" id="birthDate" name="BIRTH_DATE">
+
+    <label for="maritalStatus">Marital Status Enum ID:</label>
+    <input type="text" id="maritalStatus" name="MARITAL_STATUS_ENUM_ID">
+
+    <label for="employmentStatus">Employment Status Enum ID:</label>
+    <input type="text" id="employmentStatus" name="EMPLOYMENT_STATUS_ENUM_ID">
+
+    <label for="occupation">Occupation:</label>
+    <input type="text" id="occupation" name="OCCUPATION">
+
+    <button type="button" onclick="submitPerson()">Submit</button>
+</form>
+
+<script>
+    function submitPerson() {
+        const form = document.getElementById("personForm");
+        const formData = new FormData(form);
+
+        // Use formData to send the data to your server using AJAX or fetch
+        // Example using fetch:
+        fetch('/api/person', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(Object.fromEntries(formData)),
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log('Success:', data);
+            // Handle success, e.g., show a success message to the user
+        })
+        .catch((error) => {
+            console.error('Error:', error);
+            // Handle errors, e.g., show an error message to the user
+        });
+    }
+</script>
+
+</body>
+</html>
